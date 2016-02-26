@@ -29,6 +29,9 @@ class CartController extends Controller
         Cart::add(array(
             array('id' => $postData['product_name'], 'name' => $postData['product_name'], 'qty' => 1, 'price' => intval($postData['price']))));
 
+        $cart = Cart::content();
+        return view('cart', array('cart' => $cart));
+
     }
 
     public function cart2(Request $request)
