@@ -42,7 +42,7 @@
         <td>
     {{$item->price}} dram
         </td>
-        <td><a href='{{url("cart2?product_id=$item->id&increment=1")}}'>Buy Now</a></td>
+        <td><a href='#'>Buy Now</a></td>
         <td><a href='{{url("cart2?product_id=$item->id&decrease=1")}}'>Delete</a></td>
 
     </tr>
