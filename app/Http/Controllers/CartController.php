@@ -26,8 +26,12 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $postData = $request->all();
-        Cart::add(array(
-            array('id' => $postData['product_name'], 'name' => $postData['product_name'], 'qty' => 1, 'price' => intval($postData['price']))));
+        if(isset( $postData['product_name']) && $postData['price']) {
+            Cart::add(array(
+                array('id' => $postData['product_name'], 'name' => $postData['product_name'], 'qty' => 1, 'price' => intval($postData['price']))));
+            $cart = Cart::content();
+            return view('cart', array('cart' => $cart));
+        }
 
         $cart = Cart::content();
         return view('cart', array('cart' => $cart));
@@ -45,8 +49,13 @@ class CartController extends Controller
             Cart::update($rowId[0], $item->qty - 1);
             $cart=Cart::content();
             return view('cart', array('cart' => $cart));
-
         }
+        $cart=Cart::content();
+        return view('cart', array('cart' => $cart));
+    }
 
+    public function buy(Request $request)
+    {
+        echo "Buying";
     }
 }

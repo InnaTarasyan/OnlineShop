@@ -45,6 +45,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('cart', 'CartController@cart');
     Route::get('cart2', ['as'=>'cart','uses'=>'CartController@cart2']);
 
+    Route::get('buy', ['as'=>'buy','uses'=>'CartController@buy']);
+
     Route::post('cart_action', ['as'=>'cart','uses'=>'CartController@store']);
 
     Route::get('login', function () {

@@ -11,7 +11,7 @@
         <style>
             .carousel-inner > .item > img,
             .carousel-inner > .item > a > img {
-                width: 30%;
+                width: 80%;
                 margin: auto;
             }
         </style>
@@ -39,19 +39,19 @@
 
        <div class="carousel-inner" role="listbox">
            <div class="item active">
-               <img src="products/96896.jpg" alt="Chania">
+               <img src="products/img.jpg" alt="Chania">
            </div>
 
            <div class="item">
-               <img src="products/50783.jpg" alt="Chania">
+               <img src="products/img2.jpg" alt="Chania">
            </div>
 
            <div class="item">
-               <img src="products/50783.jpg" alt="Flower">
+               <img src="products/img.jpg" alt="Flower">
            </div>
 
            <div class="item">
-               <img src="products/96896.jpg" alt="Flower">
+               <img src="products/img2.jpg" alt="Flower">
            </div>
        </div>
 
