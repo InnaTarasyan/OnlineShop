@@ -44,6 +44,7 @@ class LoginController extends Controller
 
             if ($user != null){
 
+                Session::set('id',$user[0]->id);
                 Session::set('firstName',$user[0]->first_name);
                 Session::set('lastName',$user[0]->last_name);
 

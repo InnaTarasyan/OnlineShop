@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Welcome</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+@extends('master')
+@section('main_content')
 
-        <style>
-            .carousel-inner > .item > img,
-            .carousel-inner > .item > a > img {
-                width: 80%;
-                margin: auto;
-            }
-        </style>
-    </head>
-    <body>
    <script>
        $(function () {
            $("img").click(function() {
@@ -25,7 +9,6 @@
        });
    </script>
 
-   @include('header')
 <!--image slider-->
    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -105,6 +88,4 @@
            </div>
        </div>
 
-   @include('footer')
-    </body>
-</html>
+@stop

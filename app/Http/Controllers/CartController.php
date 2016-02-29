@@ -56,6 +56,39 @@ class CartController extends Controller
 
     public function buy(Request $request)
     {
-        echo "Buying";
+        $postData=$request->all();
+
+        DB::transaction(function() use($postData)
+        {
+            // finds the user
+            $user_id=Session::get('id');
+
+            // finds the corresponding product id
+            $product=DB::table('products')
+                ->where('product_name', '=',$postData['product_id'])
+                ->get()[0];
+
+            $product_id=$product->id;
+
+            // inserts a new record to cart table
+            $values = array('user_id' => $user_id,'product_id' => $product_id);
+            DB::table('carts')->insert($values);
+
+            // finds the count of corresponding product
+            $product_count=DB::table('products')
+                ->where('id', '=',$product_id)
+                ->get()[0]->count;
+
+            // updates the quantity of corresponding items
+            DB::table('products')->where('id', '=',$product_id)->update(array('count' => $product_count-1));
+
+        });
+
+        $rowId = Cart::search(array('id' => $postData['product_id']));
+        $item = Cart::get($rowId[0]);
+        Cart::update($rowId[0], $item->qty - 1);
+        $cart=Cart::content();
+        return view('cart', array('cart' => $cart));
+
     }
 }

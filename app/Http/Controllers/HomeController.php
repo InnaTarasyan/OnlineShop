@@ -43,7 +43,7 @@ class HomeController extends Controller
     public function addProduct()
     {
         if(session('admin')!=null) {
-            return view('AddProduct');
+            return view('addProduct');
         }
         else{
             return view('login');
@@ -58,7 +58,7 @@ class HomeController extends Controller
             $data = $controller->retrieveProductByName($name);
 
             if($data!=null) {
-                return view('ProductDetail')->with('data', $data);
+                return view('productDetail')->with('data', $data);
             }
             else{
                 $controller=new \App\Http\Controllers\LoginController();
