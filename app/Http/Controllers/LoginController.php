@@ -68,6 +68,7 @@ class LoginController extends Controller
 
     public function logOut()
     {
+       Session::forget('id');
        Session::forget('firstName');
        Session::forget('lastName');
        Session::forget('image');

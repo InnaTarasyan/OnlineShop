@@ -10,18 +10,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <style>
-        div.footer
-        {
-            background: black;
-            text-align: center;
-            color: white
-        }
 
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
-            width: 80%;
+            width: 85%;
             margin: auto;
         }
+        body { padding-bottom: 70px; }
     </style>
 
 
@@ -44,7 +39,7 @@
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><img src="../products/cart.jpg"  width="30" height="30"><span class="badge"><?php echo Cart::count(); ?></span></a></li>
+            <li><a href="cart"><img src="../products/cart.jpg" width="30" height="30"><span class="badge"><?php echo Cart::count(); ?></span></a></li>
             <li><a href="#">
                     @if(Session::has('firstName'))
                     {{ Session::get('firstName')}}
@@ -63,7 +58,12 @@
 
 @yield('main_content');
 
-<div class="panel-footer footer">Panel Footer</div>
+<nav class="navbar navbar-default navbar-bottom" role="navigation">
+    <div class="container">
+        <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
+    </div>
+</nav>
+
 </body>
 </html>
 
