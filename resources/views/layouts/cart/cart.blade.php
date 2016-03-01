@@ -37,36 +37,5 @@
 </body>
 
 
-<script type="text/javascript">
-
-     $( document ).ready(function() {
-
-            //executed when user wants to buy a product
-            $(document).on('click', '.buy', function(e){
-                e.stopPropagation();
-
-                var $elem = $(e.target);
-                var $var=$elem.attr("alt");
-                $(location).attr('href', 'buy?product_id='+$var);
-
-               // var $row = $elem.closest('tr');
-
-            });
-
-
-           //executed when user wants to delete a product
-           $(document).on('click', '.del', function(e){
-             e.stopPropagation();
-
-             var $elem = $(e.target);
-             var $var=$elem.attr("alt");
-             $(location).attr('href', 'cartRem?decrease=1&product_id='+$var);
-
-           });
-
-        });
-
-
-
-</script>
+<script src="js/card/myCard.js"></script>
 @stop

@@ -4,6 +4,7 @@ namespace App\Models;
 
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Base\Authenticatable;
+use App\Models\Base\Model;
 
 class Cart extends Model
 {

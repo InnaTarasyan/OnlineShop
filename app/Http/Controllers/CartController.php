@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Cart;
 use App\Models\Cart as ModelCart;
 use App\Models\Product;
+use View;
+use DB;
 
 
 class CartController extends Controller
@@ -23,6 +25,8 @@ class CartController extends Controller
     {
       $cart = Cart::content();
       return view('layouts\cart\cart', array('cart' => $cart));
+
+
     }
 
 
@@ -38,10 +42,12 @@ class CartController extends Controller
 
             $cart = Cart::content();
             return view('layouts\cart\cart', array('cart' => $cart));
+
         }
 
         $cart = Cart::content();
         return view('layouts\cart\cart', array('cart' => $cart));
+
     }
 
 
@@ -64,7 +70,6 @@ class CartController extends Controller
         $cart = Cart::content();
         return view('layouts\cart\cart', array('cart' => $cart));
     }
-
 
 
     /*
