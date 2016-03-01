@@ -1,15 +1,19 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Validator;
-use App\Product;
+use App\Models\Product;
+
 class ProductController extends Controller
 {
     public function store(Request $request)
     {
-
+        $model = new Product();
+        $model->validate($request);
+        $model->errors;
         $postData = $request->all();
         $messages = [
             'name.required' => 'Product Name is required',
@@ -25,6 +29,8 @@ class ProductController extends Controller
             'longDescription' => 'required',
             'image' => 'required'
         ];
+
+
         $validator = Validator::make($postData, $rules, $messages);
         if ($validator->fails()) {
             return redirect('AddProduct')->withInput()->withErrors($validator->errors());

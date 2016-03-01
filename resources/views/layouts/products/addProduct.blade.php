@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('main_content')
     <div class="container">
@@ -60,10 +60,7 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-
                 </div>
-
-
 
     </div>
             </div>

@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('main_content')
     @if(isset($data))
     <div class="container">
@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="well">
-                            <img class="img-rounded" src="../products/{{ $data->image }}" width="420" height="420"/>
+                            <img class="img-rounded" src="../products/{{ $data->image }}" width="300" height="300"/>
                         <div style="display: inline-block;">
                         </div>
                         <div style="display: inline-block;">

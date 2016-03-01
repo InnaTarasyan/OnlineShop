@@ -1,7 +1,7 @@
-@extends('master')
+@extends('layouts.master')
 @section('main_content')
 
-   <script>
+   <script language="text/javascript">
        $(function () {
            $("img").click(function() {
                $(this).css('border', "solid 6px red");
@@ -49,9 +49,11 @@
        </a>
    </div>
 
+
    <!--brings product info-->
     <div class="container">
        <h2> Products </h2>
+        @if(isset($data))
     @foreach ( $data as $key => $value )
         <div class="container-fluid">
             <div class="row">
@@ -59,8 +61,8 @@
                     <div class="well">
                         <div>
                             <div style="display: inline-block;">
-                        <img class="img-circle" src="products/{{ $value->image }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>
-                                </div>
+                        <img class="img-circle" alt="{{ $value->image }}" src="products/{{ $value->image }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>
+                            </div>
                             <div style="display: inline-block;"  class="span12 text-center">
                                 <label class="control-label">Name:</label>
                         {{ $value->product_name }} <br/>
@@ -75,13 +77,16 @@
             </div>
         </div>
     @endforeach
+            @endif
     </div>
 
    <div class="container">
        <div class="row">
            <div class="col-md-6 col-md-offset-6">
 
+       @if(isset($data))
    <?php echo $data->render(); ?>
+           @endif
 
 
     </div>
