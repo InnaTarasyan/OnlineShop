@@ -5,12 +5,11 @@
     <title>Welcome</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myCss.css">
 
 
-    <script src="js/jquery-1.12.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootbox.js"></script>
 
     <style>
 
@@ -68,8 +67,10 @@
           <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
       </div>
   </nav>
-
-
+<script src="js/jquery-1.12.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootbox.js"></script>
+@yield('pageScript');
   </body>
   </html>
 

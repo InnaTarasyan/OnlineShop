@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('main_content')
 
+
+
    <script language="text/javascript">
        $(function () {
            $("img").click(function() {

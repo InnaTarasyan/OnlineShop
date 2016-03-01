@@ -34,8 +34,12 @@
 </div>
             </div>
     </div>
-</body>
 
 
-<script src="js/card/myCard.js"></script>
+
+
+@stop
+
+@section('pageScript')
+    <script src="js/card/myCard.js"></script>
 @stop
