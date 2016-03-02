@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
 
+use Cart;
+
 class PaypalController extends Controller
 {
     private $_api_context;
@@ -35,34 +37,37 @@ class PaypalController extends Controller
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
 
+
     public function postPayment()
     {
+        // creating new payer
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
-        //item 1
-        $item_1 = new Item();
-        $item_1->setName('Item 1') // item name
-        ->setCurrency('USD')
-            ->setQuantity(2)
-            ->setPrice('150'); // unit price
+        // retrieving cart content
+        $cartContent = Cart::content();
 
 
-        //item 2
-        $item_2 = new Item();
-        $item_2->setName('Item 2')
-            ->setCurrency('USD')
-            ->setQuantity(4)
-            ->setPrice('70');
-
-        //items list
+        // creating item list and populating with corresponding content
         $item_list = new ItemList();
-        $item_list->setItems(array($item_1, $item_2));
+
+        foreach($cartContent as $cart)
+        {
+            $item = new Item();
+
+            $item->setName($cart->name) // item name
+            ->setCurrency('USD')
+                ->setQuantity($cart->qty) // item quantity
+                ->setPrice($cart->price); // unit price
+
+            $item_list->addItem($item);
+        }
+
 
         //total amount
         $amount = new Amount();
         $amount->setCurrency('USD')
-            ->setTotal(580);
+            ->setTotal(Cart::total());
 
 
         // transaction
@@ -73,10 +78,10 @@ class PaypalController extends Controller
 
 
         // redirect url's
-
         $redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(URL::route('payment.status')) // Specify return URL
         ->setCancelUrl(URL::route('payment.status'));
+
 
         // payment
         $payment = new Payment();
@@ -89,9 +94,15 @@ class PaypalController extends Controller
             $payment->create($this->_api_context);
 
         } catch (\PayPal\Exception\PPConnectionException $ex) {
-            echo $ex;
-        }
 
+            if (\Config::get('app.debug')) {
+                echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                $err_data = json_decode($ex->getData(), true);
+                exit;
+            } else{
+                    die('Some error occur, sorry for inconvenient');
+                }
+        }
 
 
         foreach($payment->getLinks() as $link) {
