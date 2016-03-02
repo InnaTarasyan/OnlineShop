@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('main_content')
     @if(isset($data))
-    <div class="container">
+    <div class="container"  style="height: 100%">
         <h1>Product Description</h1>
         <div class="container-fluid">
             <div class="row">

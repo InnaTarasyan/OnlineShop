@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main_content')
-<div class="container">
+<div class="container" style="height: 100%">
         <div class="container-fluid">
             <div class="row">
                 <table width="100%">

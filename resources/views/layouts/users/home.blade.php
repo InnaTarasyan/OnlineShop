@@ -51,9 +51,8 @@
        </a>
    </div>
 
-
    <!--brings product info-->
-    <div class="container">
+    <div class="container"  style="height: 100%">
        <h2> Products </h2>
         @if(isset($data))
     @foreach ( $data as $key => $value )

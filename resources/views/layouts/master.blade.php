@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/myCss.css') }}">
 
-
-
     <style>
 
         .carousel-inner > .item > img,
