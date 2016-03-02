@@ -41,5 +41,5 @@
 @stop
 
 @section('pageScript')
-    <script src="js/card/myCard.js"></script>
+    <script src="{{ URL::asset('js/card/myCard.js') }}"></script>
 @stop

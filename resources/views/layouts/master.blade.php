@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/myCss.css">
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/myCss.css') }}">
 
 
 
@@ -43,7 +43,9 @@
             </ul>
 
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="cart"><img src="../products/cart.jpg" width="30" height="30"><span class="badge"><?php echo Cart::count(); ?></span></a></li>
+              <li><a href="cart">
+                      <img src="{{ URL::asset('products/cart.jpg') }}" width="30" height="30">
+                      <span class="badge"><?php echo Cart::count(); ?></span></a></li>
               <li><a href="#">
                       {{ Auth::user()->first_name }}
                      </a>
@@ -52,8 +54,7 @@
                   </a>
                   </li>
                    <li><a>
-                      <img src="../uploads/{{ Auth::user()->image_name }}" width="30" height="30"/>
-
+                      <img src="{{ URL::asset('uploads/'.Auth::user()->image_name) }}" width="30" height="30"/>
                   </a></li>
               <li><a href="logOut"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
           </ul>
@@ -62,14 +63,17 @@
 
   @yield('main_content');
 
-  <nav class="navbar navbar-default navbar-bottom" role="navigation">
+  <nav class="navbar navbar-default navbar-bottom" id="footer" role="navigation">
       <div class="container">
           <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
       </div>
   </nav>
-<script src="js/jquery-1.12.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootbox.js"></script>
+
+<script src="{{ URL::asset('js/jquery-1.12.1.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootbox.js') }}"></script>
+
+
 @yield('pageScript');
   </body>
   </html>

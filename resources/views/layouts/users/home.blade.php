@@ -24,19 +24,19 @@
 
        <div class="carousel-inner" role="listbox">
            <div class="item active">
-               <img src="products/img.jpg" alt="Chania">
+               <img src="{{ URL::asset('products/img.jpg')}}" alt="Coffee"/>
            </div>
 
            <div class="item">
-               <img src="products/img2.jpg" alt="Chania">
+               <img src="{{ URL::asset('products/img2.jpg')}}" alt="Cake"/>
            </div>
 
            <div class="item">
-               <img src="products/img.jpg" alt="Flower">
+               <img src="{{ URL::asset('products/img.jpg')}}" alt="Cake"/>
            </div>
 
            <div class="item">
-               <img src="products/img2.jpg" alt="Flower">
+               <img src="{{ URL::asset('products/img2.jpg')}}" alt="Coffee"/>
            </div>
        </div>
 
@@ -63,7 +63,7 @@
                     <div class="well">
                         <div>
                             <div style="display: inline-block;">
-                        <img class="img-circle" alt="{{ $value->image }}" src="products/{{ $value->image }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>
+                                <img class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('products/'.$value->image) }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>
                             </div>
                             <div style="display: inline-block;"  class="span12 text-center">
                                 <label class="control-label">Name:</label>
