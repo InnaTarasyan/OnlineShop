@@ -39,20 +39,21 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('register_action', ['as' => 'register', 'uses' => 'RegisterController@store']);
 
     Route::get('register', function () {
-        return view('register');
+        return view('layouts\users\register');
     });
 
     Route::get('cart', 'CartController@cart');
-    Route::get('cart2', ['as'=>'cart','uses'=>'CartController@cart2']);
+    Route::get('cartRem', ['as'=>'cart','uses'=>'CartController@cartRem']);
 
     Route::get('buy', ['as'=>'buy','uses'=>'CartController@buy']);
 
     Route::post('cart_action', ['as'=>'cart','uses'=>'CartController@store']);
 
     Route::get('login', function () {
-        return view('login');
+        return view('layouts\users\login');
     });
-    Route::post('login_action', ['as' => 'login', 'uses' => 'LoginController@loginCheck']);
+    Route::post('login_action', ['as' => 'login', 'uses' => 'LoginController@loginCheck1']);
 
     Route::get('logOut','LoginController@logOut');
+
 });

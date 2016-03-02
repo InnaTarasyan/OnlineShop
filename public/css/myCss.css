@@ -1,0 +1,17 @@
+body{
+    height: 100%;
+}
+
+footer {
+    width: 100%;
+    line-height: 3em;
+    position: relative;
+}
+
+html{
+    height: 100%;
+}
+
+.blade_content {
+    height: 100%;
+}
