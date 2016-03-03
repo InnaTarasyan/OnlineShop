@@ -59,20 +59,21 @@
       </div>
   </nav>
 
-  @yield('main_content');
+  @yield('main_content')
 
-  <nav class="navbar navbar-default navbar-bottom" id="footer" role="navigation">
-      <div class="container">
+
+
+  <nav class="navbar-default" role="navigation" >
           <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
-      </div>
   </nav>
+
 
 <script src="{{ URL::asset('js/jquery-1.12.1.min.js') }}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('js/bootbox.js') }}"></script>
 
 
-@yield('pageScript');
+@yield('pageScript')
   </body>
   </html>
 

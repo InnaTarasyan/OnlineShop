@@ -30,12 +30,23 @@
 @endforeach
                     </tbody>
                 </table>
-                <b><h4>Total: <?php echo Cart::total(); ?> dram</h4></b>
-</div>
+                <b><h4>Total: <?php echo Cart::total(); ?> USD</h4></b>
+
+                @if(isset($success))
+                    <div class="alert alert-success">
+                    {{ $success }}
+                    </div>
+                @endif
+
+                @if(isset($error))
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                @endif
+
+            </div>
             </div>
     </div>
-
-
 
 
 @stop

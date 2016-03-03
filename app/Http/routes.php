@@ -52,20 +52,21 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('login', function () {
         return view('layouts\users\login');
     });
-    Route::post('login_action', ['as' => 'login', 'uses' => 'LoginController@loginCheck1']);
+    Route::post('login_action', ['as' => 'login', 'uses' => 'LoginController@loginCheck']);
 
     Route::get('logOut','LoginController@logOut');
 
 
-    Route::get('payment', array(
+    Route::get('payment/{id}', array(
         'as' => 'payment',
-        'uses' => 'PaypalController@postPayment',
+        'uses' => 'PaypalController@postPaymentItem',
     ));
 
-
-    Route::get('payment/status', array(
-        'as' => 'payment.status',
+    Route::get('payments/status', array(
+        'as' => 'payments.status',
         'uses' => 'PaypalController@getPaymentStatus',
     ));
+
+
 
 });

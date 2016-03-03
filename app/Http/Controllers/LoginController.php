@@ -16,7 +16,13 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function loginCheck1(Request $request)
+
+    /*
+     *  Logs in a new user.
+     *  The validation is described in the model class.
+     *  Laravel auth mechanism used.
+     */
+    public function loginCheck(Request $request)
     {
 
         $model=new User();

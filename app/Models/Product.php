@@ -15,9 +15,11 @@ class Product extends Model
     public $messages = [
         'name.required' => 'Product Name is required',
         'price.required' => 'Product Price is required',
-        'shortDescription.required' => 'Please enter Short Description',
-        'longDescription.required' => 'Please enter Long Description',
-        'image.required' => 'Upload the image'
+        'shortDescription.required' => 'Please input Short Description',
+        'longDescription.required' => 'Please input Long Description',
+        'count.required'=>'Please input product count',
+        'image.required' => 'Upload the image',
+        'count.numeric'=>'The count of the product must be numeric'
     ];
 
     public $rules = [
@@ -25,11 +27,11 @@ class Product extends Model
         'price' => 'required|numeric',
         'shortDescription' => 'required',
         'longDescription' => 'required',
+        'count'=>'required|numeric',
         'image' => 'required'
     ];
 
 
-
-    protected $fillable = [ 'product_name', 'image', 'price', 'short_description' ,'long_description'];
+    protected $fillable = [ 'product_name', 'image', 'price', 'short_description' ,'long_description','count'];
 
 }

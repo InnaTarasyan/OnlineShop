@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Cart;
 use App\Models\Cart as ModelCart;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 use View;
 use DB;
 
@@ -26,9 +27,7 @@ class CartController extends Controller
       $cart = Cart::content();
       return view('layouts\cart\cart', array('cart' => $cart));
 
-
     }
-
 
     /*
      *  Stores a new product to the cart
@@ -78,39 +77,9 @@ class CartController extends Controller
     public function buy(Request $request)
     {
         $postData=$request->all();
+        $productId=$postData['product_id'];
 
-        DB::transaction(function() use($postData)
-        {
-            // finds the user
-            $user_id=Auth::user()->id;
-
-            // finds the corresponding product id
-            $product=Product::
-                where('product_name', '=',$postData['product_id'])
-                ->get()[0];
-
-            $product_id=$product->id;
-
-            // inserts a new record to cart table
-            $values = array('user_id' => $user_id,'product_id' => $product_id);
-
-            ModelCart::create($values);
-
-            // finds the count of corresponding product
-            $product_count=Product::
-                where('id', '=',$product_id)
-                ->get()[0]->count;
-
-            // updates the quantity of corresponding items
-            Product::where('id', '=',$product_id)->update(array('count' => $product_count-1));
-
-        });
-
-        $rowId = Cart::search(array('id' => $postData['product_id']));
-        $item = Cart::get($rowId[0]);
-        Cart::update($rowId[0], $item->qty - 1);
-        $cart = Cart::content();
-        return view('layouts\cart\cart', array('cart' => $cart));
+        return redirect()->route('payment', [$productId]);
 
     }
 }
