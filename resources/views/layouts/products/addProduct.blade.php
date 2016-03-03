@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main_content')
-    <div class="container"  style="height: 100%; padding-bottom: 200px;">
+    <div class="container"  style="height: 100%">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
     {!! Form::open(array('route' => 'AddProduct', 'files' => true, 'class'=>'form-horizontal')) !!}
@@ -36,7 +36,7 @@
 
     <label class="control-label">Long Description</label>
             <div class="controls">
-    {!! Form::textarea('longDescription') !!}
+    {!! Form::textarea('longDescription',null,['rows' => 2, 'cols' => 40]) !!}
                 <p class="text-danger">{{ $errors->first('longDescription') }}</p>
                 </div>
     </div>

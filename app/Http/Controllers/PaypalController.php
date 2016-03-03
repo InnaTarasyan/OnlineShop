@@ -44,7 +44,6 @@ class PaypalController extends Controller
     public function postPaymentItem($id)
     {
 
-
         Session::put('product_id',$id);
 
         // gets the cart item that corresponds to the  product user wants to buy
@@ -102,9 +101,7 @@ class PaypalController extends Controller
         } catch (\PayPal\Exception\PPConnectionException $ex) {
 
             die('Some error occur, sorry for inconvenience');
-
         }
-
 
         foreach($payment->getLinks() as $link) {
             if($link->getRel() == 'approval_url') {

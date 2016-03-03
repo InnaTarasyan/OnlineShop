@@ -5,6 +5,10 @@ namespace App\Models;
 //use Illuminate\Database\Eloquent\Model;
 use App\Models\Base\Model;
 
+/*
+ *  Represents the 'products' table of the database.
+ *  Contains the corresponding validation messages.
+ */
 class Product extends Model
 {
     protected $table = 'products';
@@ -15,6 +19,7 @@ class Product extends Model
     public $messages = [
         'name.required' => 'Product Name is required',
         'price.required' => 'Product Price is required',
+        'price.numeric' => 'Price of the product must be numeric',
         'shortDescription.required' => 'Please input Short Description',
         'longDescription.required' => 'Please input Long Description',
         'count.required'=>'Please input product count',

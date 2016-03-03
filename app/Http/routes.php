@@ -49,9 +49,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('cart_action', ['as'=>'cart','uses'=>'CartController@store']);
 
-    Route::get('login', function () {
-        return view('layouts\users\login');
-    });
+    Route::get('login', 'LoginController@loggedIn');
+
     Route::post('login_action', ['as' => 'login', 'uses' => 'LoginController@loginCheck']);
 
     Route::get('logOut','LoginController@logOut');

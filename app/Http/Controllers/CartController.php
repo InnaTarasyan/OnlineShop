@@ -72,7 +72,7 @@ class CartController extends Controller
 
 
     /*
-     *  Buys a new product
+     *  Buys a new product.
      */
     public function buy(Request $request)
     {

@@ -17,6 +17,8 @@ class Model extends EloquentModel
     {
         return  $this->errors ;
     }
+
+
     public function validate(Request $request){
         $validator = Validator::make($request->all(), array_intersect_key($this->rules, $request->all()), $this->messages);
 
