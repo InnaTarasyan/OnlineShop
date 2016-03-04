@@ -9,49 +9,41 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    /*
+     *   Stores a new Product to database.
+     * Validation is described in corresponding Model class.
+     * After that uploaded image is validated, renamed and stored to local 'products' directory, product is stored to database.
+     */
     public function store(Request $request)
     {
-        $model = new Product();
-        $model->validate($request);
-        $model->errors;
         $postData = $request->all();
-        $messages = [
-            'name.required' => 'Product Name is required',
-            'price.required' => 'Product Price is required',
-            'shortDescription.required' => 'Please enter Short Description',
-            'longDescription.required' => 'Please enter Long Description',
-            'image.required' => 'Upload the image'
-        ];
-        $rules = [
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'shortDescription' => 'required',
-            'longDescription' => 'required',
-            'image' => 'required'
-        ];
 
-
-        $validator = Validator::make($postData, $rules, $messages);
-        if ($validator->fails()) {
-            return redirect('AddProduct')->withInput()->withErrors($validator->errors());
-        } else {
+        $model = new Product();
+        if($model->validate($request))
+        {
             if ($request->file('image')->isValid()) {
                 $destinationPath = 'products'; // upload path
                 $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
-                $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                $fileName = rand(11111,99999).'.'.$extension; // renaming image
                 $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
+
                 Product::create ( [
                     'product_name' => $postData['name'],
                     'image' => $fileName,
                     'price' => $postData['price'],
                     'short_description'  => $postData['shortDescription'],
-                    'long_description'  =>  $postData['longDescription']
+                    'long_description'  =>  $postData['longDescription'],
+                    'count'=>$postData['count']
                 ] );
                 return redirect('/home');
             }
             else {
                 return redirect('/AddProduct');
             }
+        }
+        else
+        {
+            return redirect('/AddProduct')->withInput()->withErrors($model->getErrors());
         }
     }
 }

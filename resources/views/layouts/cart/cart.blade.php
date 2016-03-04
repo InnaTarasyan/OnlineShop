@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main_content')
-<div class="container">
+<div class="container" style="height: 100%">
         <div class="container-fluid">
             <div class="row">
                 <table width="100%">
@@ -30,16 +30,27 @@
 @endforeach
                     </tbody>
                 </table>
-                <b><h4>Total: <?php echo Cart::total(); ?> dram</h4></b>
-</div>
+                <b><h4>Total: <?php echo Cart::total(); ?> USD</h4></b>
+
+                @if(isset($success))
+                    <div class="alert alert-success">
+                    {{ $success }}
+                    </div>
+                @endif
+
+                @if(isset($error))
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                @endif
+
+            </div>
             </div>
     </div>
-
-
 
 
 @stop
 
 @section('pageScript')
-    <script src="js/card/myCard.js"></script>
+    <script src="{{ URL::asset('js/card/myCard.js') }}"></script>
 @stop

@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    /*
+     *  Retrieves the list of products from the database, creates a pagination
+     */
     public function retrieveProducts()
     {
         if (Auth::check()) {
@@ -28,7 +31,9 @@ class HomeController extends Controller
 
     }
 
-
+    /*
+     *  Retrieves a product from the database by the provided product name
+     */
     public function retrieveProductByName($name)
     {
 
@@ -38,6 +43,11 @@ class HomeController extends Controller
             return $record[0];}
     }
 
+
+    /*
+     *   Checks whether a user is a simple user or an administrator. The user is redirected to the corresponding
+     * page according to his role.
+     */
     public function addProduct()
     {
 
@@ -50,6 +60,9 @@ class HomeController extends Controller
 
     }
 
+    /*
+     *  This function is called when user wants to watch the details of the selected product.
+     */
     public function displayProduct($name)
     {
         if (Auth::check()) {

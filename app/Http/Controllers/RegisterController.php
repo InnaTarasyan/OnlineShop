@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    /*
+     *  Registration of a new user
+     *  First the corresponding input is validated (Validation mechanism is described in model class)
+     *  After that uploaded image is validated, renamed and stored to local 'uploads' directory, user is stored to database
+     */
+
     public function store(Request $request)
     {
         $postData=$request->all();
@@ -23,7 +29,7 @@ class RegisterController extends Controller
              if ($request->file('image')->isValid()) {
                  $destinationPath = 'uploads'; // upload path
                  $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
-                 $fileName = rand(11111, 99999) . '.' . $extension; // renameing image
+                 $fileName = rand(11111, 99999) . '.' . $extension; // renaming image
                  $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
 
 

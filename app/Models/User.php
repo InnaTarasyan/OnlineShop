@@ -5,6 +5,10 @@ namespace App\Models;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Base\Authenticatable;
 
+/*
+ *  Represents the 'users' table of the database.
+ *  Contains the corresponding validation messages.
+ */
 class User extends Authenticatable
 {
 
@@ -12,12 +16,6 @@ class User extends Authenticatable
     public $timestamps = false;
     protected $dateFormat = 'U';
 
-//    public $first_name;
-//    public $last_name;
-//    public $email;
-//    public $password;
-//    public $image_name;
-//    public $role;
 
     public $messages = [
         'firstName.required' => 'First Name is required',
@@ -48,6 +46,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /*
+     *  Checks whether the user is a simple user or an administrator
+     */
     public function isAdmin()
     {
        if($this->role==0)

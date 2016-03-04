@@ -6,6 +6,9 @@ namespace App\Models;
 use App\Models\Base\Authenticatable;
 use App\Models\Base\Model;
 
+/*
+ *  Represents the 'carts' table of database
+ */
 class Cart extends Model
 {
 
