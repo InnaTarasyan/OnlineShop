@@ -2,14 +2,6 @@
 @section('main_content')
 
 
-    <script language="text/javascript">
-       $(function () {
-           $("img").click(function() {
-               $(this).css('border', "solid 6px red");
-           });
-       });
-   </script>
-
 <!--image slider-->
    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 

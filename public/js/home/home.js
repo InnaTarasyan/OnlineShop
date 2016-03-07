@@ -15,5 +15,12 @@
             });
 
         });
+
+        $(function () {
+            $("img").click(function() {
+                $(this).css('border', "solid 6px red");
+            });
+        });
+
     });
 
