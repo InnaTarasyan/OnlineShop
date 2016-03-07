@@ -41,7 +41,7 @@
             </ul>
 
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="cart">
+              <li><a href="{{ URL::route('ucart')}}">
                       <img src="{{ URL::asset('original/cart.jpg') }}" width="30" height="30">
                       <span class="badge"><?php echo Cart::count(); ?></span></a></li>
               <li><a href="#" onclick="return false;" style="color: white; cursor: default;">

@@ -42,12 +42,12 @@ Route::group(['middleware' => ['web']], function () {
         return view('layouts\users\register');
     });
 
-    Route::get('cart', 'CartController@cart');
+    Route::get('cart', ['as'=>'ucart','uses'=>'CartController@cart']);
     Route::get('cartRem', ['as'=>'cart','uses'=>'CartController@cartRem']);
 
     Route::get('buy', ['as'=>'buy','uses'=>'CartController@buy']);
 
-    Route::post('cart_action', ['as'=>'cart','uses'=>'CartController@store']);
+    Route::post('cart', ['as'=>'cart','uses'=>'CartController@store']);
 
     Route::get('login', 'LoginController@loggedIn');
 
