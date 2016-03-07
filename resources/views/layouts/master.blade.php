@@ -44,10 +44,10 @@
               <li><a href="cart">
                       <img src="{{ URL::asset('original/cart.jpg') }}" width="30" height="30">
                       <span class="badge"><?php echo Cart::count(); ?></span></a></li>
-              <li><a href="#">
+              <li><a href="#" onclick="return false;" style="color: white; cursor: default;">
                       {{ Auth::user()->first_name }}
                      </a>
-              <li><a href="#">
+              <li><a href="#" onclick="return false;" style="color: white; cursor: default;">
                       {{ Auth::user()->last_name }}
                   </a>
                   </li>

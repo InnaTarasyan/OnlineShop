@@ -54,7 +54,7 @@
                         <div>
                             <div style="display: inline-block;">
                                 <!--<img class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('products/'.$value->image) }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>-->
-                                <img class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('original/'.$value->image) }}" width="100" height="100" onclick="location.href='{{ URL::route('ProductDetail', $value->id)}}'"/>
+                                <img onmouseover="" style="cursor: pointer;" class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('original/'.$value->image) }}" width="100" height="100" onclick="location.href='{{ URL::route('ProductDetail', $value->id)}}'"/>
                             </div>
                             <div style="display: inline-block;"  class="span12 text-center">
                                 <label class="control-label">Name:</label>
