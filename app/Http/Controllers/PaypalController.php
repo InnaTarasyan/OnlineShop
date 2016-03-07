@@ -55,7 +55,7 @@ class PaypalController extends Controller
         $item = new Item();
         $item->setName($cartItem->name) // item name
         ->setCurrency('USD') //currency
-            ->setQuantity($cartItem->qty) // item quantity
+            ->setQuantity(1) // item quantity
             ->setPrice($cartItem->price); // unit price
 
 

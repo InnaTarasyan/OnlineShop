@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="well">
-                            <img class="img-rounded" src="{{ URL::asset('products/'.$data->image) }}" width="300" height="300"/>
+                            <img class="img-rounded" src="{{ URL::asset('original/'.$data->image) }}" width="300" height="300"/>
                         <div style="display: inline-block;">
                         </div>
                         <div style="display: inline-block;">

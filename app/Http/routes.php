@@ -29,10 +29,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('home','HomeController@retrieveProducts') ;
+    Route::get('home',['as'=>'home','uses'=>'HomeController@retrieveProducts']) ;
     Route::get('AddProduct','HomeController@addProduct');
 
-    Route::get('ProductDetail/{name}', 'HomeController@displayProduct');
+    Route::get('ProductDetail/{id}', ['as'=>'ProductDetail','uses'=>'HomeController@displayProduct']);
 
     Route::post('add_action', ['as' => 'AddProduct', 'uses' => 'ProductController@store']);
 
@@ -66,6 +66,15 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'PaypalController@getPaymentStatus',
     ));
 
+    Route::get('edit/{id}', array(
+        'as' => 'edit',
+        'uses' => 'ProductController@editProduct',
+    ));
 
+    Route::get('delete/{id}', array(
+        'as' => 'edit',
+        'uses' => 'ProductController@delete',
+    ));
 
+    Route::post('Update', ['as' => 'Update', 'uses' => 'ProductController@update']);
 });
