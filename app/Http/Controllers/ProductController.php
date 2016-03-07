@@ -8,7 +8,7 @@ use Mockery\CountValidator\Exception;
 use Validator;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
-use Faker\Provider\Image as Image;
+use Image;
 
 
 
@@ -65,6 +65,15 @@ class ProductController extends Controller
            $model->image = $fileName;
          }else{
              $model->image=$postData['uimage'];
+         }
+
+         $storagePath = public_path().'\\original\\'.$model->image;
+
+         if (file_exists($storagePath)) {
+
+             $path = public_path('thumb/' . 'thumb_'.$model->image);
+             Image::make($storagePath)->resize(100, 100)->save($path);
+
          }
 
 
@@ -131,15 +140,12 @@ class ProductController extends Controller
 
                 if (file_exists($storagePath)) {
 
-                    //$file = File::($storagePath)->save('thumb','imggg');
-
-
-                    File::copy($storagePath,public_path().'\\thumb\\'.$fileName);
+                    $path = public_path('thumb/' . 'thumb_'.$fileName);
+                    Image::make($storagePath)->resize(100, 100)->save($path);
 
                 }
 
 
-                // resize the uploaded image and move that to the folder 'thumb'
 
                 Product::create([
                     'product_name' => $postData['name'],
