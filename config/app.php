@@ -157,6 +157,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
 
     ],
 
@@ -205,7 +207,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart'
+        'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart',
+        'Image' => Intervention\Image\Facades\Image::class,
+
 
     ],
 

@@ -27,7 +27,7 @@
             <a class="navbar-brand" href="#">My Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="home">Home</a></li>
+            <li class="active"><a href="{{ URL::route('home')}}">Home</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contacts</a></li>
@@ -41,13 +41,13 @@
             </ul>
 
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="cart">
-                      <img src="{{ URL::asset('products/cart.jpg') }}" width="30" height="30">
+              <li><a href="{{ URL::route('ucart')}}">
+                      <img src="{{ URL::asset('original/cart.jpg') }}" width="30" height="30">
                       <span class="badge"><?php echo Cart::count(); ?></span></a></li>
-              <li><a href="#">
+              <li><a href="#" onclick="return false;" style="color: white; cursor: default;">
                       {{ Auth::user()->first_name }}
                      </a>
-              <li><a href="#">
+              <li><a href="#" onclick="return false;" style="color: white; cursor: default;">
                       {{ Auth::user()->last_name }}
                   </a>
                   </li>
@@ -64,7 +64,9 @@
 
 
   <nav class="navbar-default" role="navigation" >
-          <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
+      <div class="container">
+      <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
+      </div>
   </nav>
 
 

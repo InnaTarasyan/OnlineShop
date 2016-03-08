@@ -26,7 +26,7 @@ use Cart;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
-use App\Models\Cart as ModelCart;
+use App\Models\Transaction as ModelTransaction;
 
 class PaypalController extends Controller
 {
@@ -50,19 +50,28 @@ class PaypalController extends Controller
         $rowId = Cart::search(array('id' => $id));
         $cartItem = Cart::get($rowId[0]);
 
-
-        // creates a new PayPal Item based on the fields of the found cart item
-        $item = new Item();
-        $item->setName($cartItem->name) // item name
-        ->setCurrency('USD') //currency
-            ->setQuantity($cartItem->qty) // item quantity
-            ->setPrice($cartItem->price); // unit price
-
+        Session::put('quantity',$cartItem->qty);
 
         // creating item list and populating with corresponding content
         $item_list = new ItemList();
 
+
+
+              // creates a new PayPal Item based on the fields of the found cart item
+        $item = new Item();
+        $item->setName($cartItem->name)// item name
+        ->setCurrency('USD')//currency
+        ->setQuantity($cartItem->qty)// item quantity
+        ->setPrice($cartItem->price); // unit price
+
+
         $item_list->addItem($item);
+
+        //$item_list = new ItemList();
+       // $item_list->setItems(array($item_1));
+
+
+
 
         // creating new payer
         $payer = new Payer();
@@ -71,7 +80,7 @@ class PaypalController extends Controller
         //total amount
         $amount = new Amount();
         $amount->setCurrency('USD')
-            ->setTotal( $cartItem->price);
+            ->setTotal( ($cartItem->qty)*($cartItem->price));
 
 
         // transaction
@@ -100,8 +109,15 @@ class PaypalController extends Controller
 
         } catch (\PayPal\Exception\PPConnectionException $ex) {
 
+
             die('Some error occur, sorry for inconvenience');
         }
+        catch(\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+
 
         foreach($payment->getLinks() as $link) {
             if($link->getRel() == 'approval_url') {
@@ -110,11 +126,13 @@ class PaypalController extends Controller
             }
         }
 
+
         Session::put('paypal_payment_item', $payment->getId());
 
         if(isset($redirect_url)) {
             return Redirect::away($redirect_url);
         }
+
 
     }
 
@@ -128,9 +146,12 @@ class PaypalController extends Controller
         // retrieves the product id
         $product_id=  Session::get('product_id');
 
+        $quantity=Session::get('quantity');
+
         // clear the session payment ID and product_id
         Session::forget('paypal_payment_item');
         Session::forget('product_id');
+        Session::forget('quantity');
 
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
@@ -161,20 +182,23 @@ class PaypalController extends Controller
             // finds the user
             $user_id=Auth::user()->id;
 
+
+
             // finds the corresponding product id
             $product=Product::
             where('product_name', '=',$product_id)
                 ->get()[0];
+
 
             $product_name=$product_id;
             $product_id=$product->id;
 
 
             // inserts a new record to cart table
-            $values = array('user_id' => $user_id,'product_id' => $product_id);
+            $values = array('user_id' => $user_id,'product_id' => $product_id,'date'=>Date('y-m-d'),'quantity'=>$quantity);
 
             // inserts a new row in carts table into the database
-            ModelCart::create($values);
+            ModelTransaction::create($values);
 
             // finds the count of corresponding product
             $product_count=Product::
@@ -182,15 +206,16 @@ class PaypalController extends Controller
                 ->get()[0]->count;
 
             // updates the quantity of corresponding items (decreases it by one)
-            Product::where('id', '=',$product_id)->update(array('count' => $product_count-1));
+            Product::where('id', '=',$product_id)->update(array('count' => $product_count-$quantity));
 
             // modifies the corresponding content of a Cart
             $rowId = Cart::search(array('id' => $product_name));
             $item = Cart::get($rowId[0]);
-            Cart::update($rowId[0], $item->qty - 1);
+            Cart::update($rowId[0], $item->qty - $quantity);
             $cart = Cart::content();
 
             return view('layouts\cart\cart', array('cart' => $cart))->with('success','Payment Successful');
+
 
         }else {
             $cart = Cart::content();

@@ -2,15 +2,6 @@
 @section('main_content')
 
 
-
-   <script language="text/javascript">
-       $(function () {
-           $("img").click(function() {
-               $(this).css('border', "solid 6px red");
-           });
-       });
-   </script>
-
 <!--image slider-->
    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -24,19 +15,19 @@
 
        <div class="carousel-inner" role="listbox">
            <div class="item active">
-               <img src="{{ URL::asset('products/img.jpg')}}" alt="Coffee"/>
+               <img src="{{ URL::asset('original/img.jpg')}}" alt="Coffee"/>
            </div>
 
            <div class="item">
-               <img src="{{ URL::asset('products/img2.jpg')}}" alt="Cake"/>
+               <img src="{{ URL::asset('original/img2.jpg')}}" alt="Cake"/>
            </div>
 
            <div class="item">
-               <img src="{{ URL::asset('products/img.jpg')}}" alt="Cake"/>
+               <img src="{{ URL::asset('original/img.jpg')}}" alt="Cake"/>
            </div>
 
            <div class="item">
-               <img src="{{ URL::asset('products/img2.jpg')}}" alt="Coffee"/>
+               <img src="{{ URL::asset('original/img2.jpg')}}" alt="Coffee"/>
            </div>
        </div>
 
@@ -62,7 +53,8 @@
                     <div class="well">
                         <div>
                             <div style="display: inline-block;">
-                                <img class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('products/'.$value->image) }}" width="100" height="100" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>
+                                <!--<img class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('products/'.$value->image) }}" onclick="location.href='ProductDetail/{{ $value->product_name }}'"/>-->
+                                <img onmouseover="" style="cursor: pointer;" class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('thumb/thumb_'.$value->image) }}" width="100" height="100" onclick="location.href='{{ URL::route('ProductDetail', $value->id)}}'"/>
                             </div>
                             <div style="display: inline-block;"  class="span12 text-center">
                                 <label class="control-label">Name:</label>
@@ -71,6 +63,11 @@
                         {{ $value->price }}<br/>
                                 <label class="control-label">Description:</label>
                         {{ $value->short_description }} <br/>
+                                @if (auth()->check())
+                                    @if (auth()->user()->isAdmin())
+                                        <a href="edit/{{$value->id}}">Edit </a><a href="#" alt="delete/{{$value->id}}" class="delAction"> / Delete</a>
+                                    @endif
+                                @endif
                                 </div>
                         </div>
                     </div>
@@ -96,4 +93,7 @@
     <br/>
 
 
+@stop
+@section('pageScript')
+    <script src="{{ URL::asset('js/home/home.js') }}"></script>
 @stop

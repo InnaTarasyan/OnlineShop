@@ -29,10 +29,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('home','HomeController@retrieveProducts') ;
+    Route::get('home',['as'=>'home','uses'=>'HomeController@retrieveProducts']) ;
     Route::get('AddProduct','HomeController@addProduct');
 
-    Route::get('ProductDetail/{name}', 'HomeController@displayProduct');
+    Route::get('ProductDetail/{id}', ['as'=>'ProductDetail','uses'=>'HomeController@displayProduct']);
 
     Route::post('add_action', ['as' => 'AddProduct', 'uses' => 'ProductController@store']);
 
@@ -42,12 +42,15 @@ Route::group(['middleware' => ['web']], function () {
         return view('layouts\users\register');
     });
 
-    Route::get('cart', 'CartController@cart');
+    Route::get('cart', ['as'=>'ucart','uses'=>'CartController@cart']);
+
+    Route::get('cart1', ['as'=>'cart1','uses'=>'CartController@cart1']);
+
     Route::get('cartRem', ['as'=>'cart','uses'=>'CartController@cartRem']);
 
     Route::get('buy', ['as'=>'buy','uses'=>'CartController@buy']);
 
-    Route::post('cart_action', ['as'=>'cart','uses'=>'CartController@store']);
+    Route::post('cart', ['as'=>'cart','uses'=>'CartController@store']);
 
     Route::get('login', 'LoginController@loggedIn');
 
@@ -66,6 +69,15 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'PaypalController@getPaymentStatus',
     ));
 
+    Route::get('edit/{id}', array(
+        'as' => 'edit',
+        'uses' => 'ProductController@editProduct',
+    ));
 
+    Route::get('delete/{id}', array(
+        'as' => 'edit',
+        'uses' => 'ProductController@delete',
+    ));
 
+    Route::post('Update', ['as' => 'Update', 'uses' => 'ProductController@update']);
 });

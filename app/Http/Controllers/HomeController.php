@@ -10,6 +10,8 @@ use Validator;
 use Session;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 
 class HomeController extends Controller
@@ -25,8 +27,11 @@ class HomeController extends Controller
                 ->Paginate(2);
 
             return view('layouts\users\home')->with('data', $records);
+
+
         } else {
             return view('layouts\users\login');
+
         }
 
     }
@@ -34,10 +39,10 @@ class HomeController extends Controller
     /*
      *  Retrieves a product from the database by the provided product name
      */
-    public function retrieveProductByName($name)
+    public function retrieveProductById($id)
     {
 
-        $record=Product::where('product_name', '=',$name)
+        $record=Product::where('id', '=',$id)
             ->get();
         if($record!=null){
             return $record[0];}
@@ -56,6 +61,7 @@ class HomeController extends Controller
         }
         else{
             return view('layouts\users\login');
+
         }
 
     }
@@ -63,13 +69,16 @@ class HomeController extends Controller
     /*
      *  This function is called when user wants to watch the details of the selected product.
      */
-    public function displayProduct($name)
+    public function displayProduct($id)
     {
+
         if (Auth::check()) {
 
-            $data=HomeController::retrieveProductByName($name);
+            $data=HomeController::retrieveProductById($id);
             if($data!=null) {
-                return view('layouts\products\productDetail')->with('data', $data);
+               return view('layouts\products\productDetail')->with('data', $data);
+
+
             }
             else{
                 LoginController::logOut();
@@ -77,6 +86,8 @@ class HomeController extends Controller
         }
         else{
             return view('layouts\users\login');
+
         }
+
     }
 }
