@@ -80,4 +80,6 @@ Route::group(['middleware' => ['web']], function () {
     ));
 
     Route::post('Update', ['as' => 'Update', 'uses' => 'ProductController@update']);
+
+    Route::get('purchases', ['as'=>'purchases','uses'=>'PurchasesController@show']);
 });

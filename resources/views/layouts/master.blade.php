@@ -38,6 +38,8 @@
 @endif
 
                  </a></li>
+
+            <li><a href="purchases">My Purchases</a></li>
             </ul>
 
           <ul class="nav navbar-nav navbar-right">
