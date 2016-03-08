@@ -43,6 +43,9 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::get('cart', ['as'=>'ucart','uses'=>'CartController@cart']);
+
+    Route::get('cart1', ['as'=>'cart1','uses'=>'CartController@cart1']);
+
     Route::get('cartRem', ['as'=>'cart','uses'=>'CartController@cartRem']);
 
     Route::get('buy', ['as'=>'buy','uses'=>'CartController@buy']);

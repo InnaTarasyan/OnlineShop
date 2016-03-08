@@ -82,4 +82,11 @@ class CartController extends Controller
         return redirect()->route('payment', [$productId]);
 
     }
+
+
+
+    public function cart1()
+    {
+        return view('layouts\cart\cart1');
+    }
 }
