@@ -25,7 +25,7 @@ class CartController extends Controller
     public function cart()
     {
       $cart = Cart::content();
-      return view('layouts\cart\cart', array('cart' => $cart));
+      return view('layouts\cart\cart1', array('cart' => $cart));
 
     }
 
@@ -40,12 +40,12 @@ class CartController extends Controller
                 array('id' => $postData['product_name'], 'name' => $postData['product_name'], 'qty' => 1, 'price' => intval($postData['price']))));
 
             $cart = Cart::content();
-            return view('layouts\cart\cart', array('cart' => $cart));
+            return view('layouts\cart\cart1', array('cart' => $cart));
 
         }
 
         $cart = Cart::content();
-        return view('layouts\cart\cart', array('cart' => $cart));
+        return view('layouts\cart\cart1', array('cart' => $cart));
 
     }
 
@@ -64,10 +64,12 @@ class CartController extends Controller
             Cart::update($rowId[0], $item->qty - 1);
 
             $cart = Cart::content();
-            return view('layouts\cart\cart', array('cart' => $cart));
+           // return view('layouts\cart\cart', array('cart' => $cart));
+            return view('layouts\cart\cart1', array('cart' => $cart));
         }
         $cart = Cart::content();
-        return view('layouts\cart\cart', array('cart' => $cart));
+        //return view('layouts\cart\cart', array('cart' => $cart));
+        return view('layouts\cart\cart1', array('cart' => $cart));
     }
 
 
@@ -87,6 +89,7 @@ class CartController extends Controller
 
     public function cart1()
     {
-        return view('layouts\cart\cart1');
+        $cart = Cart::content();
+        return view('layouts\cart\cart1',array('cart' => $cart));
     }
 }
