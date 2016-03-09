@@ -58,7 +58,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('logOut','LoginController@logOut');
 
+    Route::get('buyMultiple','PaypalController@buyMultiple');
 
+
+    /*
     Route::get('payment/{id}', array(
         'as' => 'payment',
         'uses' => 'PaypalController@postPaymentItem',
@@ -67,7 +70,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('payments/status', array(
         'as' => 'payments.status',
         'uses' => 'PaypalController@getPaymentStatus',
+    ));*/
+
+
+    Route::get('payments/statusMultiple', array(
+        'as' => 'payments.statusMultiple',
+        'uses' => 'PaypalController@getPaymentStatusMultiple',
     ));
+
 
     Route::get('edit/{id}', array(
         'as' => 'edit',
