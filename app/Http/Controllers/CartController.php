@@ -64,12 +64,12 @@ class CartController extends Controller
             Cart::update($rowId[0], $item->qty - 1);
 
             $cart = Cart::content();
-           // return view('layouts\cart\cart', array('cart' => $cart));
-            return view('layouts\cart\cart1', array('cart' => $cart));
+
+            return Redirect::route('cart', array('cart' => $cart));
         }
         $cart = Cart::content();
-        //return view('layouts\cart\cart', array('cart' => $cart));
-        return view('layouts\cart\cart1', array('cart' => $cart));
+
+        return Redirect::route('cart', array('cart' => $cart));
     }
 
 
