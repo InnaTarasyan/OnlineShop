@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">My Shop</a>
+            <a class="navbar-brand" href="{{ URL::route('home')}}">My Shop</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="{{ URL::route('home')}}">Home</a></li>
