@@ -9,6 +9,7 @@ use Validator;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
 use Image;
+use Illuminate\Support\Facades\Redirect;
 
 
 
@@ -24,7 +25,8 @@ class ProductController extends Controller
               ->orderBy('product_name', 'asc')
               ->Paginate(2);
 
-          return view('layouts\users\home')->with('data', $records);
+         // return view('layouts\users\home')->with('data', $records);
+          return Redirect::route('home', array('data' => $records));
       }
 
      /*
@@ -87,7 +89,14 @@ class ProductController extends Controller
                                                                  'count'=>$model->count,
                                                                  'image'=>$model->image
                                                                    ));
-             return view('layouts\products\addProduct')->with('data',$model);
+             //return view('layouts\products\addProduct')->with('data',$model);
+
+             $data = Product::where('id', '>', 0)
+                 ->orderBy('product_name', 'asc')
+                 ->Paginate(2);
+
+             return Redirect::route('home', array('data' => $data));
+
          }
          else{
             return view('layouts\products\addProduct')->with('data',$model)->withErrors($model->getErrors());

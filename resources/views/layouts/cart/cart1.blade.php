@@ -20,7 +20,7 @@
     @endforeach
     </tbody>
 </table>
-<button onclick="retrieveSelected()">Buy Selected Items</button>
+<button onclick="retrieveSelected()" class="btn-primary">Buy Selected Items</button>
             @if(isset($success))
                 <div class="alert alert-success">
                     {{ $success }}
@@ -54,17 +54,21 @@
       function retrieveSelected()
       {
           var data=oTable.rows('.selected').data();
+          if(data.length!=0) {
 
-          var marr=[];
-
-
-          $.each(data, function(index, item) {
-              marr.push(item[1]);
-
-          });
+              var marr = [];
 
 
-          $(location).attr('href', 'buyMultiple?data='+JSON.stringify(marr));
+              $.each(data, function (index, item) {
+                  marr.push(item[1]);
+
+              });
+
+
+              $(location).attr('href', 'buyMultiple?data=' + JSON.stringify(marr));
+          }else {
+              bootbox.alert("You have not selected any item");
+          }
       }
 
         var oTable;
