@@ -42,6 +42,16 @@ Route::group(['middleware' => ['web']], function () {
         return view('layouts\users\register');
     });
 
+    /*
+    Route::get('search', function () {
+        return view('layouts\search\index');
+    });*/
+
+    Route::get('search','SearchController@load');
+
+
+    Route::get('find', ['as'=>'find','uses'=>'SearchController@retrieveData']);
+
     Route::get('cart', ['as'=>'ucart','uses'=>'CartController@cart']);
 
     Route::get('cart1', ['as'=>'cart1','uses'=>'CartController@cart1']);
