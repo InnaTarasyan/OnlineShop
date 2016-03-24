@@ -16,6 +16,10 @@ class Category extends Model
     protected $dateFormat = 'U';
 
 
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 
     protected $fillable = [ 'id', 'category_name'];
 

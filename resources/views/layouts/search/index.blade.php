@@ -27,9 +27,15 @@
                     cache: false,
                          success: function(html)
                            {
-                               //alert(html);
 
-                               var result;
+                               if(html.html==null)
+                               {
+                                   $('#result').css('visibility', 'hidden');
+                               }else {
+                                   $('#result').css('visibility', 'visible');
+                               }
+
+                                   var result;
                                result=html.html;
 
                                /*

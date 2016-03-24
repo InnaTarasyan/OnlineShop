@@ -5,6 +5,7 @@ namespace App\Models;
 //use Illuminate\Database\Eloquent\Model;
 use App\Models\Base\Model;
 
+
 /*
  *  Represents the 'products' table of the database.
  *  Contains the corresponding validation messages.
@@ -14,6 +15,12 @@ class Product extends Model
     protected $table = 'products';
     public $timestamps = false;
     protected $dateFormat = 'U';
+
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id');
+    }
 
 
     public $messages = [
@@ -37,6 +44,6 @@ class Product extends Model
     ];
 
 
-    protected $fillable = [ 'product_name', 'image', 'price', 'short_description' ,'long_description','count'];
+    protected $fillable = [ 'product_name', 'image', 'price', 'short_description' ,'long_description','count', 'category_id'];
 
 }

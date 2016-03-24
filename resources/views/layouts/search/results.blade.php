@@ -33,6 +33,10 @@
                                     {{ $value->price }}<br/>
                                     <label class="control-label">Description:</label>
                                     {{ $value->short_description }} <br/>
+                                    <label class="control-label">Category:</label>
+                                    {{ $value->category->category_name }} <br/>
+                                    <label class="control-label">Count:</label>
+                                    {{ $value->count }} <br/>
                                 </div>
                             </div>
                         </div>
