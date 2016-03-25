@@ -37,10 +37,10 @@
                 max: 500,
                 values: [ 0, 0 ],
                 slide: function( event, ui ) {
-                    $( "#cost" ).val( ui.values[ 0 ] + " -" + ui.values[ 1 ] );
+                    $( "#count" ).val( ui.values[ 0 ] + " -" + ui.values[ 1 ] );
                 }
             });
-            $( "#cost" ).val( $( "#slider-range1" ).slider( "values", 0 ) +
+            $( "#count" ).val( $( "#slider-range1" ).slider( "values", 0 ) +
                     " -" + $( "#slider-range1" ).slider( "values", 1 ) );
 
             $( "#slider-range2" ).slider({
@@ -79,12 +79,18 @@
                 var price1=array[0];
                 var price2=array[1];
 
+                var count=$( "#count" ).val().match(/[0-9\.]+/g);
+                count=count +'';
+                var arrayCounts=count.split(',');
+                var count1=arrayCounts[0];
+                var count2=arrayCounts[1];
+
 
                 $.ajax({
                     type: "GET",
                     url: "find",
                    /* data:  { "data": data,"category":category},*/
-                    data: 'data='+data+'&category='+category+'&price1='+price1+'&price2='+price2,
+                    data: 'data='+data+'&category='+category+'&price1='+price1+'&price2='+price2+'&count1='+count1+'&count2='+count2,
                     cache: false,
                          success: function(html)
                            {
@@ -180,10 +186,10 @@
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
-                <label id="countLabel" for="cost">Count range:</label>
+                <label id="countLabel" for="count">Count range:</label>
                 <div id="countDiv" style="display: none;">
                 <p>
-                    <input type="text" id="cost" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    <input type="text" id="count" readonly style="border:0; color:#f6931f; font-weight:bold;">
                 </p>
 
                 <div id="slider-range1"></div>

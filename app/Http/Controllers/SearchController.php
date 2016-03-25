@@ -37,8 +37,11 @@ class SearchController extends Controller
       $price1=$postData['price1'];
       $price2=$postData['price2'];
 
+      $count1=$postData['count1'];
+      $count2=$postData['count2'];
 
-      if($category!="category" && $data!="" && ($price1==0) && ($price2==0)) {
+
+      if($category!="category" && $data!="" && ($price1==0) && ($price2==0) && ($count1==0) && ($count2==0)) {
 
           $categoryObject= Category::where('category_name','=',$category)->get()[0];
           $category_id= $categoryObject->id;
@@ -54,7 +57,7 @@ class SearchController extends Controller
 
       }
 
-       if($category=="category" && $data!=""  && ($price1==0) && ($price2==0))
+       if($category=="category" && $data!=""  && ($price1==0) && ($price2==0) && ($count1==0) && ($count2==0))
        {
            $records = Product::where('product_name', 'LIKE', $data . '%')
                ->orWhere('short_description', 'LIKE', $data . '%')
@@ -64,7 +67,7 @@ class SearchController extends Controller
        }
 
 
-       if($category=="category" && $data!="" && ($price1!=0 || $price2!=0))
+       if($category=="category" && $data!="" && ($price1!=0 || $price2!=0) && ($count1==0) && ($count2==0))
        {
            $records = Product::whereBetween('price',array($price1,$price2))
                 ->where(function($query) use($data){
@@ -76,7 +79,7 @@ class SearchController extends Controller
            return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
        }
 
-       if($category!="category" && $data!="" && ($price1!=0 || $price2!=0))
+       if($category!="category" && $data!="" && ($price1!=0 || $price2!=0) && ($count1==0) && ($count2==0))
        {
            $categoryObject= Category::where('category_name','=',$category)->get()[0];
            $category_id= $categoryObject->id;
@@ -93,7 +96,73 @@ class SearchController extends Controller
            return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
        }
 
+       if($category=="category" && $data!="" && ($price1==0) && ($price2==0) && ($count1!=0 || $count2!=0)) {
 
+           $records = Product::whereBetween('count',array($count1,$count2))
+               ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+       }
+
+       if($category!="category" && $data!="" && ($price1==0) && ($price2==0) && ($count1!=0 || $count2!=0)) {
+
+           $categoryObject= Category::where('category_name','=',$category)->get()[0];
+           $category_id= $categoryObject->id;
+
+           $records = Product::whereBetween('count',array($count1,$count2))
+               ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })
+               ->where('category_id','=',$category_id)
+               ->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+
+       }
+
+       if($category=="category" && $data!="" && ($price1!=0 || $price2!=0) && ($count1!=0 || $count2!=0)){
+
+           $records = Product::where(function($query) use ($data,$price1,$price2,$count1,$count2){
+                   $query->whereBetween('count',array($count1,$count2));
+                   $query->whereBetween('price',array($price1,$price2));
+                })
+               ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })
+               ->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+
+       }
+
+       if($category!="category" && $data!="" && ($price1!=0 || $price2!=0) && ($count1!=0 || $count2!=0)){
+
+           $categoryObject= Category::where('category_name','=',$category)->get()[0];
+           $category_id= $categoryObject->id;
+
+           $records = Product::where(function($query) use ($data,$price1,$price2,$count1,$count2){
+               $query->whereBetween('count',array($count1,$count2));
+               $query->whereBetween('price',array($price1,$price2));
+           })
+               ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })
+               ->where('category_id','=',$category_id)
+               ->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+
+       }
 
 
 
