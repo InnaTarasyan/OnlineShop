@@ -10,23 +10,85 @@
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootbox.js') }}"></script>
 
+
+
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.12.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script>
+        $(function() {
+
+
+            $("#priceLabel").click(function(){
+                //$("#priceDiv").slideToggle("fast");
+                $("#priceDiv").toggle("slide");
+            });
+
+            $("#countLabel").click(function(){
+                $("#countDiv").toggle("slide");
+            });
+
+            $( "#slider-range1" ).slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 0, 0 ],
+                slide: function( event, ui ) {
+                    $( "#cost" ).val( ui.values[ 0 ] + " -" + ui.values[ 1 ] );
+                }
+            });
+            $( "#cost" ).val( $( "#slider-range1" ).slider( "values", 0 ) +
+                    " -" + $( "#slider-range1" ).slider( "values", 1 ) );
+
+            $( "#slider-range2" ).slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 0, 0 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 ) +
+                    " - $" + $( "#slider-range2" ).slider( "values", 1 ) );
+
+
+        });
+    </script>
+
+
+
     <script type="text/javascript">
         $(function(){
 
             $("#submitSearch").click(function()
             {
+
                 var data=$("#searchText").val();
 
                 var category= $('#categories option:selected').attr('value');
+
+               // var price=parseInt($( "#amount" ).val().replace(/[^0-9\.]/g, ''), "");
+
+                var price=$( "#amount" ).val().match(/[0-9\.]+/g);
+                price=price + '';
+                var array=price.split(',');
+                var price1=array[0];
+                var price2=array[1];
+
 
                 $.ajax({
                     type: "GET",
                     url: "find",
                    /* data:  { "data": data,"category":category},*/
-                    data: 'data='+data+'&category='+category,
+                    data: 'data='+data+'&category='+category+'&price1='+price1+'&price2='+price2,
                     cache: false,
                          success: function(html)
                            {
+
 
                                if(html.html==null)
                                {
@@ -96,7 +158,7 @@
             </div>
         </div>
 
-        <div class="row hidden-xs" style="margin-top:10px;">
+        <div class="row hidden-xs" style="margin-top: 5px;">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
                 <select name="categories" id="categories" style="width: 100%">
                     <option  value="category" selected>Category</option>
@@ -108,18 +170,26 @@
                 </select>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
-                <select name="size" style="width: 100%">
-                    <option value="A">Cost</option>
-                    <option value="B">400</option>
-                    <option value="C">600</option>
-                </select>
+                <!--<input type="range"/>-->
+                <label id="priceLabel" for="amount">Price range:</label>
+                <div id="priceDiv" style="display: none;">
+                <p>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+
+                <div id="slider-range2"></div>
+                </div>
+
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
-                <select name="size" style="width: 100%">
-                    <option value="A">Count</option>
-                    <option value="B">100</option>
-                    <option value="C">200</option>
-                </select>
+                <label id="countLabel" for="cost">Count range:</label>
+                <div id="countDiv" style="display: none;">
+                <p>
+                    <input type="text" id="cost" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+
+                <div id="slider-range1"></div>
+                </div>
             </div>
 
          </div>

@@ -34,6 +34,10 @@ class SearchController extends Controller
       $data = $postData['data'];
       $category=$postData['category'];
 
+      $price1=$postData['price1'];
+      $price2=$postData['price2'];
+
+
       if($category.""!="category" && $data!="") {
 
           $categoryObject= Category::where('category_name','=',$category)->get()[0];
@@ -48,7 +52,8 @@ class SearchController extends Controller
 
           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
 
-      } else if($category!="" && $data!="")
+      }
+       if($category!="" && $data!="")
           {
           $records = Product::where('product_name', 'LIKE', $data . '%')
               ->orWhere('short_description', 'LIKE', $data . '%')
