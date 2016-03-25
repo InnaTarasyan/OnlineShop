@@ -38,7 +38,7 @@ class SearchController extends Controller
       $price2=$postData['price2'];
 
 
-      if($category.""!="category" && $data!="") {
+      if($category!="category" && $data!="" && ($price1==0) && ($price2==0)) {
 
           $categoryObject= Category::where('category_name','=',$category)->get()[0];
           $category_id= $categoryObject->id;
@@ -53,14 +53,48 @@ class SearchController extends Controller
           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
 
       }
-       if($category!="" && $data!="")
-          {
-          $records = Product::where('product_name', 'LIKE', $data . '%')
-              ->orWhere('short_description', 'LIKE', $data . '%')
-              ->get();
 
-          return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
-          }
+       if($category=="category" && $data!=""  && ($price1==0) && ($price2==0))
+       {
+           $records = Product::where('product_name', 'LIKE', $data . '%')
+               ->orWhere('short_description', 'LIKE', $data . '%')
+               ->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+       }
+
+
+       if($category=="category" && $data!="" && ($price1!=0 || $price2!=0))
+       {
+           $records = Product::whereBetween('price',array($price1,$price2))
+                ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+       }
+
+       if($category!="category" && $data!="" && ($price1!=0 || $price2!=0))
+       {
+           $categoryObject= Category::where('category_name','=',$category)->get()[0];
+           $category_id= $categoryObject->id;
+
+           $records = Product::whereBetween('price',array($price1,$price2))
+               ->where(function($query) use($data){
+                   $query ->orWhere('product_name', 'LIKE', $data . '%');
+                   $query ->orWhere('short_description', 'LIKE', $data . '%');
+
+               })
+               ->where('category_id','=',$category_id)
+               ->get();
+
+           return response()->json(['html'=>View::make('layouts/search/results')->with('data',$records)->render()]);
+       }
+
+
+
 
 
    }

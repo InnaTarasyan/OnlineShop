@@ -88,8 +88,6 @@
                     cache: false,
                          success: function(html)
                            {
-
-
                                if(html.html==null)
                                {
                                    $('#result').css('visibility', 'hidden');
