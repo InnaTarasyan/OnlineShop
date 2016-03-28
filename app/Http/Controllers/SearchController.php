@@ -59,7 +59,6 @@ class SearchController extends Controller
             $records = $records->where('category_id', '=', $category_id);
         }
 
-
         $records  = $records->paginate(1);
 
         if($records->isEmpty())
