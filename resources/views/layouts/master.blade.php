@@ -75,12 +75,13 @@
   @yield('main_content')
 
 
-
+<!--
   <nav class="navbar-default" role="navigation" >
       <div class="container">
       <h6>Copyright © 2016 SoftCode. All rights reserved.</h6>
       </div>
   </nav>
+-->
 
 
 <script src="{{ URL::asset('js/jquery-1.12.1.min.js') }}"></script>

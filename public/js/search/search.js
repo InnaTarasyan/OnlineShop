@@ -62,7 +62,7 @@ $(function() {
             count1: count1,
             count2: count2,
             _token: $_token,
-            page: page,
+             page: page,
         };
 
 

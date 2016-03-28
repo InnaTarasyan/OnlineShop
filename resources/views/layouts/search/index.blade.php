@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/myCss.css') }}">
-    <script src="{{ URL::asset('js/jquery-1.12.1.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootbox.js') }}"></script>
+@extends('layouts.master')
+<link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
 
+@section('main_content')
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.12.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-   <script src="{{ URL::asset('js/search/search.js') }}"></script>
-</head>
-
-<body style="padding-top: 20px;">
-
-
-<div class="row">
+<div class="row" style="height: 100%">
     <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 center-block" style="float:none;">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xm-6 searchblock">
@@ -76,6 +59,12 @@
         </div>
 </div>
 
+@stop
+@section('pageScript')
 
-</body>
-</html>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('js/bootbox.js') }}"></script>
+    <script src="{{ URL::asset('js/jquery-1.12.2.min.js') }}"></script>
+    <script src="{{ URL::asset('js/jquery-ui.js') }}"></script>
+    <script src="{{ URL::asset('js/search/search.js') }}"></script>
+@stop
