@@ -23,15 +23,16 @@ class Product extends Model
     }
 
 
+
     public $messages = [
-        'name.required' => 'Product Name is required',
+        'name.required'  => 'Product Name is required',
         'price.required' => 'Product Price is required',
-        'price.numeric' => 'Price of the product must be numeric',
+        'price.numeric'  => 'Price of the product must be numeric',
         'shortDescription.required' => 'Please input Short Description',
-        'longDescription.required' => 'Please input Long Description',
-        'count.required'=>'Please input product count',
+        'longDescription.required'  => 'Please input Long Description',
+        'count.required' => 'Please input product count',
         'image.required' => 'Upload the image',
-        'count.numeric'=>'The count of the product must be numeric'
+        'count.numeric' =>'The count of the product must be numeric'
     ];
 
     public $rules = [
@@ -46,4 +47,11 @@ class Product extends Model
 
     protected $fillable = [ 'product_name', 'image', 'price', 'short_description' ,'long_description','count', 'category_id'];
 
+    public static function searchByNameDesc($data)
+    {
+        return self::where(function($query) use($data){
+            $query ->orWhere('product_name', 'LIKE', $data . '%');
+            $query ->orWhere('short_description', 'LIKE', $data . '%');
+        });
+    }
 }
