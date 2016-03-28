@@ -52,7 +52,7 @@
 
 <div class="container">
 
-
+{!!  $data->render() !!}
 
 </div>
 

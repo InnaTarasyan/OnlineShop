@@ -51,6 +51,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('find', ['as'=>'find','uses'=>'SearchController@retrieveData']);
+    Route::post('find/{page?}', 'SearchController@retrieveData');
 
     Route::get('cart', ['as'=>'ucart','uses'=>'CartController@cart']);
 

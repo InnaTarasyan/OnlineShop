@@ -30,4 +30,12 @@ class Model extends EloquentModel
 
         return true;
     }
+
+    public static function getA($data)
+    {
+        return static::where(function($query) use($data){
+            $query ->orWhere('product_name', 'LIKE', $data . '%');
+            $query ->orWhere('short_description', 'LIKE', $data . '%');
+        });
+    }
 }

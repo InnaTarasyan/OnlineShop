@@ -21,7 +21,6 @@
     <script>
         $(function() {
 
-
             $("#priceLabel").click(function(){
                 //$("#priceDiv").slideToggle("fast");
                 $("#priceDiv").toggle("slide");
@@ -62,93 +61,88 @@
 
 
     <script type="text/javascript">
-        $(function(){
+        $(function() {
 
-            $("#submitSearch").click(function()
-            {
+            var page;
+            $("#submitSearch").bind('click', function (e, arg1) {
 
-                var data=$("#searchText").val();
 
-                var category= $('#categories option:selected').attr('value');
+                var data = $("#searchText").val();
+                var category = $('#categories option:selected').attr('value');
 
-               // var price=parseInt($( "#amount" ).val().replace(/[^0-9\.]/g, ''), "");
+                var price = $("#amount").val().match(/[0-9\.]+/g);
+                price = price + '';
+                var array = price.split(',');
+                var price1 = array[0];
+                var price2 = array[1];
 
-                var price=$( "#amount" ).val().match(/[0-9\.]+/g);
-                price=price + '';
-                var array=price.split(',');
-                var price1=array[0];
-                var price2=array[1];
-
-                var count=$( "#count" ).val().match(/[0-9\.]+/g);
-                count=count +'';
-                var arrayCounts=count.split(',');
-                var count1=arrayCounts[0];
-                var count2=arrayCounts[1];
+                var count = $("#count").val().match(/[0-9\.]+/g);
+                count = count + '';
+                var arrayCounts = count.split(',');
+                var count1 = arrayCounts[0];
+                var count2 = arrayCounts[1];
+                var $_token = $("[name='_token']").val();
+                var postDate = {
+                    data: data,
+                    category: category,
+                    price1: price1,
+                    price2: price2,
+                    count1: count1,
+                    count2: count2,
+                    _token: $_token,
+                    page: page,
+                };
 
 
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "find",
-                   /* data:  { "data": data,"category":category},*/
-                    data: 'data='+data+'&category='+category+'&price1='+price1+'&price2='+price2+'&count1='+count1+'&count2='+count2,
-                    cache: false,
-                         success: function(html)
-                           {
-                               if(html.html==null)
-                               {
-                                   $('#result').css('visibility', 'hidden');
-                               }else {
-                                   $('#result').css('visibility', 'visible');
-                               }
+                    dataType: 'json',
+                    data: postDate,
+                    async: false,
+                    success: function (html) {
+                        if (html.html == null) {
+                            $('#result').css('visibility', 'hidden');
+                        } else {
+                            $('#result').css('visibility', 'visible');
+                        }
 
-                                   var result;
-                               result=html.html;
+                        var result;
+                        result = html.html;
 
-                               /*
-                               var newData = html.data;
-                               for (var i = 0; i < newData.data.length; i++) {
+                        $("#result").html(result);
+                        console.log('ok');
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+            });
 
+            $(document).on('click','.pagination li a',function(e){
+                e.preventDefault();
+                e.stopPropagation();
 
-                                   result+="<div class='row'>";
+                page = $(this).text();
 
-                                   result+="<div class='col-xs-6'>";
-                                   result+="<div class='well'>";
+                if($(this).attr("rel")=="next")
+                {
+                    page=  parseInt($(this).parent().siblings('.active').text())+1;
 
-                                   var product = newData.data[i];
+                }else if($(this).attr("rel")=="prev") {
 
-                                   result+="<div style='display: inline-block;'>";
-                                   result+="<img class='img-circle' src=thumb/thumb_"+product.image+">";
-                                   result+="</div>";
+                    page=parseInt($(this).parent().siblings('.active').text())-1;
+                }
 
-                                   result+="<div style='display: inline-block;'  class='text-center'>";
-                                   var product_name=product.product_name;
-                                   result+=product_name+"<br/>";
-                                   var price=product.price;
-                                   result+=price+"<br/>";
-                                   var short_description=product.short_description;
-                                   result+=short_description+"<br/>";
-                                   var long_description=product.long_description;
-                                   result+=long_description+"<br/>";
-                                   result+="</div>";
+                $("#submitSearch").trigger('click', [page]);
 
-
-
-                                   result+="</div></div></div>";
-
-                               }*/
-
-
-                               $("#result").html(result);
-                           }
-                      })
-            }
-            )
+            });
         });
+
    </script>
 </head>
 
 <body style="padding-top: 20px;">
-
 
 
 <div class="row">
@@ -156,6 +150,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xm-6 searchblock">
                 <input class="form-control search" type="text" value="" id="searchText" name="searchText" placeholder="Search by name, description">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xm-6 searchblock">
                 <button type="button" id="submitSearch" value="Search">Search</button>
@@ -204,8 +199,6 @@
 
         </div>
 </div>
-
-
 
 
 </body>

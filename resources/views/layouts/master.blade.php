@@ -27,20 +27,31 @@
             <a class="navbar-brand" href="{{ URL::route('home')}}">My Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ URL::route('home')}}">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contacts</a></li>
-
-            <li><a href="AddProduct">
-@if (auth()->check())
-    @if (auth()->user()->isAdmin())Add Product @endif
-@endif
-
-                 </a></li>
-
-            <li><a href="purchases">My Purchases</a></li>
-            </ul>
+            <li class="active">
+                <a href="{{ URL::route('home')}}">Home</a>
+            </li>
+            <li>
+                <a href="#">Products</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Contacts</a>
+            </li>
+            <li>
+                <a href="AddProduct">
+                    @if (auth()->check())
+                        @if (auth()->user()->isAdmin())
+                                Add Product
+                            @endif
+                    @endif
+                 </a>
+            </li>
+            <li>
+                <a href="purchases">My Purchases</a>
+            </li>
+        </ul>
 
           <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ URL::route('cart1')}}">
