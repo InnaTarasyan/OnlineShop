@@ -36,11 +36,21 @@ $(function() {
 
 
     var page;
+    var categoryLast="";
     $("#submitSearch").bind('click', function (e, arg1) {
 
 
         var data = $("#searchText").val();
+
+
         var category = $('#categories option:selected').attr('value');
+
+        if(categoryLast!=category && categoryLast!="")
+        {
+            page=1;
+        }
+        categoryLast=category;
+
 
         var price = $("#amount").val().match(/[0-9\.]+/g);
         price = price + '';
