@@ -45,8 +45,7 @@
                 </div>
             </div>
         @endforeach
-    @else
-        Nothing Found
+
     @endif
 </div>
 

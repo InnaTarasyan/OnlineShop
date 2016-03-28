@@ -41,7 +41,10 @@ class SearchController extends Controller
         $count1   = Input::get('count1');
         $count2   = Input::get('count2');
 
-        $records = Product::searchByNameDesc($data);
+
+        if(!empty($data)) {
+           $records = Product::searchByNameDesc($data);
+        }
 
         if($price1 || $price2) {
             $records = $records->whereBetween('price',array($price1, $price2));
@@ -56,7 +59,17 @@ class SearchController extends Controller
             $records = $records->where('category_id', '=', $category_id);
         }
 
-        $records     = $records->paginate(1);
-        return response()->json(['html'=>View::make('layouts/search/results')->with('data', $records)->render()]);
+
+        $records  = $records->paginate(1);
+
+        if($records->isEmpty())
+        {
+            $status="Fail";
+        }else{
+            $status="Success";
+        }
+
+
+        return response()->json(['status'=>$status,'html'=>View::make('layouts/search/results')->with('data', $records)->render()]);
    }
 }

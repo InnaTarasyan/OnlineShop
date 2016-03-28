@@ -101,6 +101,15 @@
                     data: postDate,
                     async: false,
                     success: function (html) {
+
+                        if(html.status.toString()=="Success"){
+                            $('#res').css('visibility', 'hidden');
+                        }
+                        else if(html.status.toString()=="Fail")
+                        {
+                            $("#res").html("<b>Nothing Found</b>");
+                            $('#res').css('visibility', 'visible');
+                        }
                         if (html.html == null) {
                             $('#result').css('visibility', 'hidden');
                         } else {
@@ -194,6 +203,7 @@
          </div>
 
         <div class="row" style="margin-top: 20%;">
+            <div id="res"></div>
             <div id="result" class="container-fluid" style="margin-top: 20px;"></div>
         </div>
 
