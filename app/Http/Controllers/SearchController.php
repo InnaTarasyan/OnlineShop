@@ -50,7 +50,7 @@ class SearchController extends Controller
             $records = $records->whereBetween('price',array($price1, $price2));
         }
         if($count1 || $count2) {
-            $records = $records->whereBetween('price',array($count1, $count2));
+            $records = $records->whereBetween('count',array($count1, $count2));
         }
 
         $category_id = Category::where('category_name', '=', $category)->pluck('id');
