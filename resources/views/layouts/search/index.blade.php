@@ -1,6 +1,5 @@
 @extends('layouts.master')
 <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
-
 @section('main_content')
 
 <div class="row" style="height: 100%">
@@ -11,7 +10,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xm-6 searchblock">
-                <button type="button" id="submitSearch" value="Search">Search</button>
+               <button type="button" id="submitSearch" value="Search"  class="btn btn-default">Search</button>
             </div>
         </div>
 
@@ -28,7 +27,7 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
                 <!--<input type="range"/>-->
-                <label id="priceLabel" for="amount">Price range:</label>
+                <label id="priceLabel" for="amount" style="width: 100%;">Price range:</label>
                 <div id="priceDiv" style="display: none;">
                 <p>
                     <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -39,7 +38,7 @@
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
-                <label id="countLabel" for="count">Count range:</label>
+                <label id="countLabel" for="count" style="width: 100%;">Count range:</label>
                 <div id="countDiv" style="display: none;">
                 <p>
                     <input type="text" id="count" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -51,9 +50,11 @@
 
          </div>
 
-        <div class="row" style="margin-top: 20%;">
-            <div id="res"></div>
-            <div id="result" class="container-fluid" style="margin-top: 20px;"></div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xm-6 searchblock">
+                <div id="res"></div>
+                <div id="result" class="container-fluid" style="margin-top: 20px;"></div>
+            </div>
         </div>
 
         </div>

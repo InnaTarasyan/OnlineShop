@@ -1,7 +1,7 @@
 
 
 <!--brings product info-->
- <div class="container"  style="height: 100%;margin-left: -40px;">
+ <div class="container"  style="margin-left: -40px;">
     @if(count($data)>0)
         <h2> Products </h2>
         @foreach ( $data as $key => $value )
@@ -32,11 +32,8 @@
             </div>
         @endforeach
 
+         {!!  $data->render() !!}
     @endif
-</div>
-
-<div class="container">
-
-{!!  $data->render() !!}
 
 </div>
+
