@@ -1,7 +1,4 @@
-<script language="javascript">
-    var max_count = "<?php echo json_encode($count); ?>";
-    var max_price = "<?php echo json_encode($price); ?>";
-</script>
+
 @extends('layouts.master')
 <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
 @section('main_content')
@@ -67,6 +64,10 @@
 @stop
 @section('pageScript')
 
+    <script language="javascript">
+        var max_count="{!! json_encode($count) !!}";
+        var max_price="{!! json_encode($price) !!}";
+    </script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootbox.js') }}"></script>
     <script src="{{ URL::asset('js/jquery-1.12.2.min.js') }}"></script>
