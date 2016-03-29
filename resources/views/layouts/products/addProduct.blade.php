@@ -84,6 +84,18 @@
         </div>
 
         <div class="control-group">
+            <label class="control-label">Category</label>
+            <div class="controls">
+                 @if(isset($data->category_id))
+                 {{Form::select('category_id', array('1' => 'Beverages', '2' => 'HouseHold','3'=>'Fruits'),$data->category_id )}}
+                 @else
+                {{Form::select('category_id', array('1' => 'Beverages', '2' => 'HouseHold','3'=>'Fruits'), '1')}}
+                 @endif
+                    <p class="text-danger">{{ $errors->first('category') }}</p>
+            </div>
+        </div>
+
+        <div class="control-group">
 
 
      @if(isset($data->image))

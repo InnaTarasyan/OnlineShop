@@ -32,7 +32,8 @@ class Product extends Model
         'longDescription.required'  => 'Please input Long Description',
         'count.required' => 'Please input product count',
         'image.required' => 'Upload the image',
-        'count.numeric' =>'The count of the product must be numeric'
+        'count.numeric' =>'The count of the product must be numeric',
+        'category.required'=>'The product category is required'
     ];
 
     public $rules = [
@@ -41,7 +42,8 @@ class Product extends Model
         'shortDescription' => 'required',
         'longDescription' => 'required',
         'count'=>'required|numeric',
-        'image' => 'required'
+        'image' => 'required',
+        'category'=>'required'
     ];
 
 

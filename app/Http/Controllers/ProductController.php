@@ -162,7 +162,8 @@ class ProductController extends Controller
                     'price' => $postData['price'],
                     'short_description' => $postData['shortDescription'],
                     'long_description' => $postData['longDescription'],
-                    'count' => $postData['count']
+                    'count' => $postData['count'],
+                    'category_id'=>$postData['category_id']
                 ]);
 
                 return redirect('/home');
