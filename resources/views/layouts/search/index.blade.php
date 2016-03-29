@@ -1,3 +1,7 @@
+<script language="javascript">
+    var max_count = "<?php echo json_encode($count); ?>";
+    var max_price = "<?php echo json_encode($price); ?>";
+</script>
 @extends('layouts.master')
 <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
 @section('main_content')

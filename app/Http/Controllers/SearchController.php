@@ -16,6 +16,7 @@ use App\Models\Category;
 
 
 
+
 class SearchController extends Controller
 {
     /**
@@ -23,8 +24,11 @@ class SearchController extends Controller
      */
     public function load()
     {
+        $max_price=Product::all()->max('price');
+        $max_count=Product::all()->max('count');
+
         $categories = Category::all();
-        return view('layouts\search\index')->with('categories', $categories);
+        return view('layouts\search\index')->with('categories', $categories)->with('price',$max_price)->with('count',$max_count);
     }
 
     /**
@@ -42,7 +46,11 @@ class SearchController extends Controller
         $count2   = Input::get('count2');
 
 
+        if(!empty($data))
         $records = Product::searchByNameDesc($data);
+        else
+        $records=Product::where('id', '>', 0)
+            ->orderBy('product_name', 'asc');
 
 
         if($price1 || $price2) {

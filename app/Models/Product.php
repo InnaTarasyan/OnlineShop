@@ -52,8 +52,8 @@ class Product extends Model
     public static function searchByNameDesc($data)
     {
         return self::where(function($query) use($data){
-            $query ->orWhere('product_name', 'LIKE', $data . '%');
-            $query ->orWhere('short_description', 'LIKE', $data . '%');
+            $query ->orWhere('product_name', 'LIKE', '%'.$data . '%');
+            $query ->orWhere('short_description', 'LIKE', '%'.$data . '%');
         });
     }
 }

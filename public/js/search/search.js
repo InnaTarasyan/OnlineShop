@@ -1,5 +1,5 @@
-$(function() {
 
+$(function() {
 
     $("#priceLabel").click(function(){
         //$("#priceDiv").slideToggle("fast");
@@ -13,7 +13,7 @@ $(function() {
     $( "#slider-range1" ).slider({
         range: true,
         min: 0,
-        max: 500,
+        max: max_count,
         values: [ 0, 0 ],
         slide: function( event, ui ) {
             $( "#count" ).val( ui.values[ 0 ] + " -" + ui.values[ 1 ] );
@@ -25,7 +25,7 @@ $(function() {
     $( "#slider-range2" ).slider({
         range: true,
         min: 0,
-        max: 500,
+        max: max_price,
         values: [ 0, 0 ],
         slide: function( event, ui ) {
             $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -36,8 +36,10 @@ $(function() {
 
 
     var page;
-    var categoryLast="";
+    var categoryLast = "";
     $("#submitSearch").bind('click', function (e, arg1) {
+
+
 
 
         var data = $("#searchText").val();
@@ -45,10 +47,12 @@ $(function() {
 
         var category = $('#categories option:selected').attr('value');
 
+
         if(categoryLast!=category && categoryLast!="")
         {
             page=1;
         }
+
         categoryLast=category;
 
 
@@ -84,7 +88,7 @@ $(function() {
             async: false,
             success: function (html) {
 
-                if(html.status.toString()=="Success"){
+                if(html.status.toString() == "Success"){
                     $('#res').css('visibility', 'hidden');
                 }
                 else if(html.status.toString()=="Fail")
@@ -120,7 +124,8 @@ $(function() {
         {
             page=  parseInt($(this).parent().siblings('.active').text())+1;
 
-        }else if($(this).attr("rel")=="prev") {
+        }
+        else if($(this).attr("rel") == "prev") {
 
             page=parseInt($(this).parent().siblings('.active').text())-1;
         }
