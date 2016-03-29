@@ -1,6 +1,7 @@
 
 $(function() {
 
+    /*
     $("#priceLabel").click(function(){
         //$("#priceDiv").slideToggle("fast");
         $("#priceDiv").toggle("slide");
@@ -8,7 +9,7 @@ $(function() {
 
     $("#countLabel").click(function(){
         $("#countDiv").toggle("slide");
-    });
+    });*/
 
     $( "#slider-range1" ).slider({
         range: true,
@@ -39,22 +40,15 @@ $(function() {
     var categoryLast = "";
     $("#submitSearch").bind('click', function (e, arg1) {
 
-
-
-
         var data = $("#searchText").val();
 
-
         var category = $('#categories option:selected').attr('value');
-
 
         if(categoryLast!=category && categoryLast!="")
         {
             page=1;
         }
-
         categoryLast=category;
-
 
         var price = $("#amount").val().match(/[0-9\.]+/g);
         price = price + '';
@@ -69,23 +63,23 @@ $(function() {
         var count2 = arrayCounts[1];
         var $_token = $("[name='_token']").val();
         var postDate = {
-            data: data,
+            data:     data,
             category: category,
-            price1: price1,
-            price2: price2,
-            count1: count1,
-            count2: count2,
-            _token: $_token,
-             page: page,
+            price1:   price1,
+            price2:   price2,
+            count1:   count1,
+            count2:   count2,
+            _token:   $_token,
+             page:    page,
         };
 
 
         $.ajax({
-            type: "POST",
-            url: "find",
+            type:     "POST",
+            url:      "find",
             dataType: 'json',
-            data: postDate,
-            async: false,
+            data:      postDate,
+            async:     false,
             success: function (html) {
 
                 if(html.status.toString() == "Success"){

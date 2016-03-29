@@ -32,7 +32,7 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
                 <!--<input type="range"/>-->
                 <label id="priceLabel" for="amount" style="width: 100%;">Price range:</label>
-                <div id="priceDiv" style="display: none;">
+                <div id="priceDiv">
                 <p>
                     <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                 </p>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 center-block">
                 <label id="countLabel" for="count" style="width: 100%;">Count range:</label>
-                <div id="countDiv" style="display: none;">
+                <div id="countDiv">
                 <p>
                     <input type="text" id="count" readonly style="border:0; color:#f6931f; font-weight:bold;">
                 </p>
