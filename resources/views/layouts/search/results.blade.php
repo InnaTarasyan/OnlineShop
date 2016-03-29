@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/myCss.css') }}">
-    <script src="{{ URL::asset('js/jquery-1.12.1.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootbox.js') }}"></script>
 
-</head>
-<body>
 
 <!--brings product info-->
-<div class="container"  style="height: 100%">
+ <div class="container"  style="height: 100%;margin-left: -40px;">
     @if(count($data)>0)
         <h2> Products </h2>
         @foreach ( $data as $key => $value )
-            <div class="container">
+              <div class="container">
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="well">
-                            <div>
+                              <div>
                                 <div style="display: inline-block;">
                                    <img onmouseover="" style="cursor: pointer;" class="img-circle" alt="{{ $value->image }}" src="{{ URL::asset('thumb/thumb_'.$value->image) }}" width="100" height="100" onclick="location.href='{{ URL::route('ProductDetail', $value->id)}}'"/>
                                 </div>
@@ -39,9 +26,8 @@
                                     {{ $value->count }} <br/>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
+                       </div>
+                   </div>
                 </div>
             </div>
         @endforeach
@@ -54,5 +40,3 @@
 {!!  $data->render() !!}
 
 </div>
-
-</body>
