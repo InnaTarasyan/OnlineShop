@@ -42,9 +42,8 @@ class SearchController extends Controller
         $count2   = Input::get('count2');
 
 
-        if(!empty($data)) {
-           $records = Product::searchByNameDesc($data);
-        }
+        $records = Product::searchByNameDesc($data);
+
 
         if($price1 || $price2) {
             $records = $records->whereBetween('price',array($price1, $price2));
